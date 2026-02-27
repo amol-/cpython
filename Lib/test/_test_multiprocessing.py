@@ -3517,6 +3517,8 @@ class _TestRemoteManager(BaseTestCase):
         # Make queue finalizer run before the server is stopped
         del queue
 
+    @warnings_helper.ignore_fork_in_thread_deprecation_warnings()
+    @support.skip_if_sanitizer('TSan: leaks threads', thread=True)
     def test_client_propagation(self):
         authkey = os.urandom(32)
 
